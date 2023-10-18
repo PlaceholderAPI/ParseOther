@@ -1,4 +1,6 @@
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
@@ -19,7 +21,7 @@ public class ParseOtherExpansion extends PlaceholderExpansion {
   
   @Override
   public String getVersion() {
-    return "1.4.6";
+    return "1.5.0";
   }
   
   @SuppressWarnings("deprecation")
@@ -33,9 +35,23 @@ public class ParseOtherExpansion extends PlaceholderExpansion {
     String user = PlaceholderAPI.setPlaceholders(p, ("%" + strings[0] + "%"));
     OfflinePlayer player;
     if (user.contains("%")) {
-      player = Bukkit.getOfflinePlayer(strings[0]);
+      try {
+        UUID id = UUID.fromString(strings[0]);
+        player = Bukkit.getOfflinePlayer(id);
+        if (player.getName() == null)
+          player = Bukkit.getOfflinePlayer(strings[0]);
+      } catch (IllegalArgumentException e) {
+        player = Bukkit.getOfflinePlayer(strings[0]);
+      }
     } else {
-      player = Bukkit.getOfflinePlayer(user);
+      try {
+        UUID id = UUID.fromString(user);
+        player = Bukkit.getOfflinePlayer(id);
+        if (player.getName() == null)
+          player = Bukkit.getOfflinePlayer(user);
+      } catch (IllegalArgumentException e) {
+        player = Bukkit.getOfflinePlayer(user);
+      }
     }
     String placeholder = PlaceholderAPI.setPlaceholders(player, ("%" + strings[1] + "%"));
     if (placeholder.startsWith("%") && placeholder.endsWith("%")) {
