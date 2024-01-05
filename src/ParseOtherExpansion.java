@@ -21,7 +21,7 @@ public class ParseOtherExpansion extends PlaceholderExpansion {
   
   @Override
   public String getVersion() {
-    return "1.5.0";
+    return "2.0.0";
   }
   
   @SuppressWarnings("deprecation")
