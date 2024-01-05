@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>Expansion-ParseOther</groupId>
   <artifactId>Expansion-ParseOther</artifactId>
-  <version>1.4.6</version>
+  <version>1.5.0</version>
   <build>
 	<finalName>${project.artifactId}</finalName>
     <sourceDirectory>src</sourceDirectory>
